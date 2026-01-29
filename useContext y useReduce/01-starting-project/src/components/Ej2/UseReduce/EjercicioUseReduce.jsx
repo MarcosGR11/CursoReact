@@ -1,42 +1,43 @@
-export function counterReducer(state, action) {
+export function counterReducer( state, action ) {
     if(action.type === 'INCREMENT'){
-        const updatedCount = [...state.count ]
-        updatedCount + 1
-     return updatedCount
+        return {count: state.count + 1}
     }
+    
     if(action.type === 'DECREMENT'){
-     return state.count-1
+        return {count: state.count - 1}
     }
+    
     if(action.type === 'RESET'){
-     return state.count = 0
+        return {count: 0}
     }
+    
     return state;
 }
 
 function App() {
-    const [counterState, CounterDispatch] = React.useReducer(
+    const [counterState, counterDispatch] = React.useReducer(
         counterReducer,
         {
-            count: 0
+            count: 0,
         }
     )
     
     
     function handleIncrement(count){
-        counterReducer({
+        counterDispatch({
             type: 'INCREMENT',
             payload: count
         })
     }
     
     function handleDecrement(count){
-        counterReducer({
+        counterDispatch({
             type: 'DECREMENT',
             payload: count
         })
     }
     function handleReset(count){
-        counterReducer({
+        counterDispatch({
             type: 'RESET',
             payload: count
         })
@@ -56,3 +57,4 @@ function App() {
 }
 
 export default App;
+
